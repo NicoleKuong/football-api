@@ -17,7 +17,7 @@ router.post("/team", (req, res, next) => {
 
 router.get("/team/:id", (req, res, next) => {
   const teamId = parseInt(req.params.id);
-  Team.findByPk(teamId)
+  Team.findByPk(teamId, { include: [City] })
     .then(user => {
       if (user) {
         res.json(user);
