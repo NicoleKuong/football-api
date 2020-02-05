@@ -14,4 +14,18 @@ router.post("/team", (req, res, next) => {
     .then(team => res.json(team))
     .catch(error => next(error));
 });
+
+router.get("/team/:id", (req, res, next) => {
+  const teamId = parseInt(req.params.id);
+  Team.findByPk(teamId)
+    .then(user => {
+      if (user) {
+        res.json(user);
+      } else {
+        res.status(404).send("User not found!");
+      }
+    })
+    .catch(error => next(error));
+});
+
 module.exports = router;
